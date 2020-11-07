@@ -1,7 +1,6 @@
 import pybloomfilter
 import os
 import allel
-group = PairingGroup('SS512')
 def readData(dir):
     fs=os.listdir(dir)
 
