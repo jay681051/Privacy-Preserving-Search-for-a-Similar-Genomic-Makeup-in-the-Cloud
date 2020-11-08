@@ -33,10 +33,10 @@ def higherarchial_index_gen(bfpath, number_of_patients,  patients_snp_matrx, ):
   return rootnode, nodelist
 
 def search(rootnode, query, threshold)
-rootnodes={}
+rootnodes=[]
 rootnodes.append(rootnode)
-stach={}
-result={}
+stach=[]
+result=[]
 for rootnode in rootnodes:
   stack.append(rootnode)
   while len(stack)>0:
