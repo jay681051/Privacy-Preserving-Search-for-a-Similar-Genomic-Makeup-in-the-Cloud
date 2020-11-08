@@ -1,17 +1,14 @@
 def higherarchial_index_gen(bfpath, number_of_patients,  patients_snp_matrx, ):
   r=random.generation()
   tbf = pybloomfilter.BloomFilter.open(bfpath+"template.bloom")
-  patients={}
   SNPs={}
   X = np.zeros([number_of_patients, 20101326], dtype=int)
   for i in range(number_of_patients):
     bf = tbf.copy_template(bfpath+str(i)+".bloom")
-
     SNPs[i]=patients_snp_matrx[i]
     for j in SNPs[i]:
       bf.add(j)
     bf.close()
-
     tmp = bitarray.bitarray()
     bf_new = tbf.copy_template(bfpath+str(i)+".bloom")
     with open(bfpath+str(i)+".bloom", 'rb') as fh:
