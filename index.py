@@ -13,6 +13,7 @@ def higherarchial_index_gen(bfpath, number_of_patients,  patients_snp_matrx, ):
     bf.close()
 
     tmp = bitarray.bitarray()
+    bf_new = tbf.copy_template(bfpath+str(i)+".bloom")
     with open(bfpath+str(i)+".bloom", 'rb') as fh:
       tmp.fromfile(fh)
       try:
@@ -21,15 +22,17 @@ def higherarchial_index_gen(bfpath, number_of_patients,  patients_snp_matrx, ):
         while idx<20101326:
           alpha=prf(k+str(pos))
           alpha=prf(alpha+str(r))
-          X[i,alpha]=1
+          bf_new.add(alpha)
           idx = tmp.index(1, idx+1, 20101326)
       except:
           print("error in index generation ")
+    bf_new.close()
+    X[i]=bf_new.tobitarry()
   Z = hierarchy.linkage(X, method='ward', metric="euclidean", optimal_ordering=True )
   rootnode, nodelist =hierarchy.to_tree(Z,rd=True)
   return rootnode, nodelist
 
-def search(rootnode, query, threshold,)
+def search(rootnode, query, threshold)
 rootnodes={}
 rootnodes.append(rootnode)
 stach={}
